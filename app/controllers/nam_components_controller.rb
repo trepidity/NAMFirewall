@@ -8,7 +8,7 @@ class NamComponentsController < ApplicationController
   end
 
   def create
-    puts 'received message'
+    puts "received request for #{request.session_options[:id]}"
     @component = NamComponent.create(component_params)
     respond_to do |format|
       format.js {}

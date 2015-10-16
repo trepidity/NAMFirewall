@@ -1,4 +1,10 @@
-Total rules: <%=@rules.count %>
+<% unless @rules.nil? %>
+    Total rules: <%=@rules.count %>
+    <% else %>
+    <p>You must have at least one IDP, Access Gateway and Admin Console to build the appropriate rules.</p>
+<% end %>
+
+
 <br />
 <% @rules.each do |rule| %>
     <%= render :partial => 'build_rules/rule', :locals => {:rule => rule} %>

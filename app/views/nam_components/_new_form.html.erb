@@ -2,20 +2,21 @@
 
 <%= form_for NamComponent.new , url: '/nam_components/create', remote: true do %>
     <%= label_tag 'name:' %>
-    <%= text_field_tag :name %>
+    <%= text_field_tag :name, nil, :required => true  %>
     <%= label_tag 'IP address:' %>
-    <%= text_field_tag :ipaddress %>
+    <%= text_field_tag :ipaddress, nil, :required => true %>
 
     <h4>Component Type</h4>
-    <%= label_tag 'IDP:' %>
     <%= radio_button_tag :component_type, 'idp' %>
-    <%= label_tag 'Access Gateway:' %>
+    <%= label_tag 'IDP:' %>
     <%= radio_button_tag :component_type,  'ag' %>
-    <%= label_tag 'Admin:' %>
+    <%= label_tag 'Access Gateway:' %>
     <%= radio_button_tag :component_type, 'admin' %>
-    <%= label_tag 'LDAP User Store:' %>
+    <%= label_tag 'Admin:' %>
     <%= radio_button_tag :component_type, 'ldap' %>
-    <%= label_tag 'AD User Store:' %>
+    <%= label_tag 'LDAP User Store:' %>
     <%= radio_button_tag :component_type, 'kerb' %>
-    <%= submit_tag 'Add' %>
+    <%= label_tag 'AD User Store:' %>
+    
+    <%= submit_tag 'Add Device' %>
 <% end %>
