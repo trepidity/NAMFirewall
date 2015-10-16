@@ -1,0 +1,16 @@
+<h1>Welcome to NAM Firewalls by Novacoast</h1>
+<p>This tool can be used to generate the firewall rules required for the different NetIQ Access Manager components.</p>
+<p>You can find more information at .</p>
+
+<%= render partial: 'nam_components/new_form' %>
+
+<li><%= render partial: 'welcome/list_nam_device' %></li>
+
+<div>
+  <%= button_to 'Build Rules',
+                { :controller => :build_rules, :action=> :show, :page => @current_page},
+                { :remote => true, :id => 'lnk_build' }
+  %>
+</div>
+
+<div id="results"></div>

@@ -1,0 +1,5 @@
+Total rules: <%=@rules.count %>
+<br />
+<% @rules.each do |rule| %>
+    <%= render :partial => 'build_rules/rule', :locals => {:rule => rule} %>
+<% end %>
