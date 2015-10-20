@@ -1,0 +1,7 @@
+<%= form_for @edit_component do |f| %>
+    <%= f.text_field :name %>
+    <%= label_tag 'IP address:' %>
+    <%= f.text_field :ipaddress %>
+
+    <%= f.submit 'Save Changes' %>
+<% end %>

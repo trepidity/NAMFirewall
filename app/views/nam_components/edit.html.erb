@@ -1,2 +1,3 @@
-<h1>Component#edit</h1>
-<p>Find me in app/views/component/edit.html.erb</p>
+<h1>Edit Details</h1>
+<%=@edit_component.name%>
+<%= render(:partial => 'nam_components/edit_form', :locals => {:edit_component => @edit_component }) %>

@@ -8,15 +8,15 @@
 
     <h4>Component Type</h4>
     <%= radio_button_tag :component_type, 'idp' %>
-    <%= label_tag 'IDP:' %>
+    <%= label_tag 'IDP' %>
     <%= radio_button_tag :component_type,  'ag' %>
-    <%= label_tag 'Access Gateway:' %>
+    <%= label_tag 'Access Gateway' %>
     <%= radio_button_tag :component_type, 'admin' %>
-    <%= label_tag 'Admin:' %>
+    <%= label_tag 'Admin' %>
     <%= radio_button_tag :component_type, 'ldap' %>
-    <%= label_tag 'LDAP User Store:' %>
+    <%= label_tag 'LDAP User Store' %>
     <%= radio_button_tag :component_type, 'kerb' %>
-    <%= label_tag 'AD User Store:' %>
-    
+    <%= label_tag 'AD User Store' %>
+
     <%= submit_tag 'Add Device' %>
 <% end %>

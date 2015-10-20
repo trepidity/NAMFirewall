@@ -11,7 +11,18 @@
                 { :controller => :build_rules, :action=> :show, :page => @current_page},
                 { :remote => true, :id => 'lnk_build' }
   %>
+  <%= button_to 'Clear All Rules',
+                { :controller => :build_rules, :action=> :destroy, :page => @current_page},
+                { :remote => true, :id => 'lnk_build' }
+  %>
 </div>
 
+<div id='session_id' style="display: none"><%=@rule_session.session_id %></div>
+
 <div id="results"></div>
-<%=request.session_options[:id]%>
+
+<div id="share_results">
+  <%=render partial: 'build_rules/share' %>
+</div>
+
+

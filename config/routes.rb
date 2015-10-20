@@ -1,8 +1,17 @@
 Rails.application.routes.draw do
   post 'nam_components/create'
+  # get 'nam_components/destroy/:id'
+  # post 'nam_components/destroy/:id'
+  # get 'nam_components/edit/:id'
+
+  resources :nam_components
+  resources :share
 
   get 'build_rules/show'
   post 'build_rules/show'
+
+  get 'build_rules/destroy'
+  post 'build_rules/destroy'
 
   # get 'component/new'
   #
@@ -12,7 +21,7 @@ Rails.application.routes.draw do
   #
   # get 'component/edit'
   #
-  # get 'component/destroy'
+
   #
   # get 'component/index'
   #

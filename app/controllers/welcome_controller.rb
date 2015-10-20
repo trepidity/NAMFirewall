@@ -1,10 +1,7 @@
 class WelcomeController < ApplicationController
-  def index
-    # @component = Component.new
-  end
 
-  def create
-    print 'create called'
+  def index
+    @rule_session = RuleModel.find_by_session_id(request.session_options[:id])
   end
 
 end
