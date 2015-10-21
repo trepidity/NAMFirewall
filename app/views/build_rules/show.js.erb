@@ -1,2 +1,1 @@
-$('#results').replaceWith("<%= escape_javascript(render(:partial => 'build_rules/rules')) %>");
-//$('#share_results').replaceWith("<%= escape_javascript(render(:partial => 'build_rules/share')) %>");
+$('#results').append("<%= escape_javascript(render(:partial => 'build_rules/rules')) %>").show();

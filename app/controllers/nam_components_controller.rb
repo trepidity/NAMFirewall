@@ -8,8 +8,8 @@ class NamComponentsController < ApplicationController
   # end
 
   def create
-    puts "received request for #{request.session_options[:id]}"
-    rule_session = RuleModel.find_or_create_by(:session_id => request.session_options[:id])
+    hex = session[:session_hex]
+    rule_session = RuleModel.find_by_session_id(hex)
     @component = rule_session.nam_components.create(component_params)
     rule_session.save
 

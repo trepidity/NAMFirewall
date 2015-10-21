@@ -1,20 +1,24 @@
 class BuildRulesController < ApplicationController
 
   def destroy
-    rule_session = RuleModel.find_by_session_id(request.session_options[:id])
-    respond_to do |format|
-      if rule_session.nam_components.delete_all then
-        format.html { redirect_to root_url, notice: 'All rules were successfully cleared.' }
-      else
-        format.html { redirect_to root_url, notice: 'Rules were not cleared out.' }
-      end
+    rule_session = RuleModel.find_by_session_id(session[:session_hex])
+    if rule_session.nam_components.delete_all then
+      p 'successfully cleared rules'
     end
+
+    # respond_to do |format|
+    #   if rule_session.nam_components.delete_all then
+    #     format.html  { redirect_to root_url, notice: 'All rules were successfully cleared.' }
+    #   else
+    #     format.html { redirect_to root_url, notice: 'Rules were not cleared out.' }
+    #   end
+    # end
   end
 
   # show the rules
   def show
     @rules = Array.new
-    @rule_session = RuleModel.find_by_session_id(request.session_options[:id])
+    @rule_session = RuleModel.find_by_session_id(session[:session_hex])
     idps = @rule_session.nam_components.where(:component_type => 'idp')
     admins = @rule_session.nam_components.where(:component_type => 'admin')
     ags = @rule_session.nam_components.where(:component_type => 'ag')
