@@ -1,11 +1,21 @@
-<% if @rule_model.rules.nil? %>
-    <p>You must have at least one IDP, Access Gateway and Admin Console to build the appropriate rules.</p>
-<% else %>
-    Total rules: <%=@rule_model.rules.count %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Rules: <%= @rule_model.rules.count %></h3>
+  </div>
 
-    <br />
-    <% @rule_model.rules.each do |rule| %>
-        <%= render :partial => 'build_rules/rule', :locals => {:rule => rule} %>
+  <div class="panel-body">
+    <% if @rule_model.rules.nil? %>
+        <p>You must have at least one IDP, Access Gateway and Admin Console to build the appropriate rules.</p>
+    <% else %>
+        <% if @rule_model.rules.count == 0 %>
+            <p>You must have at least one IDP, Access Gateway and Admin Console to build the appropriate rules.</p>
+        <% end %>
+
+        <br/>
+        <% @rule_model.rules.each do |rule| %>
+            <%= render :partial => 'build_rules/rule', :locals => {:rule => rule} %>
+        <% end %>
     <% end %>
-<% end %>
 
+  </div>
+</div>
