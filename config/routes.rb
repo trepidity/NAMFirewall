@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :nam_components
   resources :share
+  resources :download
 
   get 'build_rules/show'
   post 'build_rules/show'

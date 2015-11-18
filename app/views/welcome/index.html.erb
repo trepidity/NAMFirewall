@@ -4,7 +4,7 @@
 
 <%= render partial: 'nam_components/new_form' %>
 
-<li><%= render partial: 'welcome/list_nam_device' %></li>
+<li><%= render partial: 'nam_components/list_nam_device' %></li>
 
 <div>
   <%= button_to 'Build Rules',
@@ -15,6 +15,10 @@
                 { :controller => :build_rules, :action=> :destroy, :page => @current_page},
                 { :remote => true, :id => 'lnk_clear_rules' }
   %>
+  <%= button_to 'Modify Components',
+                { :controller => :nam_components, :action=> :index, :page => @current_page},
+                { :remote => true, :id => 'lnk_load_components' }
+  %>
 </div>
 
 <div id='session_id' style="display: none"><%=@rule_session.session_id %></div>
@@ -23,6 +27,5 @@
 
 <div id="share_results">
   <%=render partial: 'build_rules/share' %>
+  <%=render partial: 'build_rules/download_csv' %>
 </div>
-
-

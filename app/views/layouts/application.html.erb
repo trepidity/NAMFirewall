@@ -10,5 +10,10 @@
 
 <%= yield %>
 
+    <div id="flash">
+      <% if notice.present? %>
+          <%= render partial: "shared/notice_banner" %>
+      <% end %>
+    </div>
 </body>
 </html>

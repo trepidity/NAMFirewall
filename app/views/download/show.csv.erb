@@ -1,0 +1,5 @@
+<% @rule_model.rules.each do |rule| %>
+    <% rule.port.each do |p| %>
+      <%= rule.source %>,<%= rule.dest %>,<%= p %>,<%= rule.comment %>
+    <% end %>
+<% end %>

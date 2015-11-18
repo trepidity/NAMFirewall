@@ -1,5 +1,5 @@
 <h2>Results</h2>
 
-<% @rules.each do |rule| %>
+<% @rule_model.rules.each do |rule| %>
     <%= render :partial => 'build_rules/rule', :locals => {:rule => rule} %>
 <% end %>

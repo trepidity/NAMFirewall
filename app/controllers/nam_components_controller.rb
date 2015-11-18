@@ -1,20 +1,17 @@
 class NamComponentsController < ApplicationController
-  # def new
-  #   @component = NamComponent.create(component_params)
-  #
-  #   respond_to do |format|
-  #     format.js {}
-  #   end
-  # end
 
   def create
     hex = session[:session_hex]
     rule_session = RuleModel.find_by_session_id(hex)
-    @component = rule_session.nam_components.create(component_params)
-    rule_session.save
-
-    respond_to do |format|
-      format.js {}
+    @component = rule_session.NamComponents.create(component_params)
+    if rule_session.save!
+      respond_to do |format|
+        logger.info 'Added successfully'
+        format.js { flash[:notice] = 'Added successfully'}
+      end
+    else
+      logger.error(@component.errors.full_messages)
+      format.js { flash[:error] = 'Failed to create component'}
     end
   end
 
@@ -22,24 +19,24 @@ class NamComponentsController < ApplicationController
     @component = NamComponent.find(params[:id])
     respond_to do |format|
       if @component.update_attributes(params[:nam_component].permit(:name, :ipaddress, :component_type))
-        format.html { redirect_to root_url, notice: 'test was successfully modified.' }
+        flash[:notice] = 'Update successful.'
+        format.html { redirect_to root_url }
       else
         format.html { render action: 'edit' }
       end
     end
   end
 
-
   def edit
     @edit_component = NamComponent.find(params[:id])
-    puts "found #{@edit_component.inspect} to edit"
   end
 
   def destroy
     component = NamComponent.find(params[:id])
     respond_to do |format|
       if component.destroy
-        format.html { redirect_to root_url, notice: 'component was successfully deleted.' }
+        flash[:notice] = 'Delete successful.'
+        format.html { redirect_to root_url }
       else
         format.html { render action: 'edit' }
       end

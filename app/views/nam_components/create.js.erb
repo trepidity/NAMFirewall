@@ -1,2 +1,3 @@
 $("<%= escape_javascript(render @component) %>").appendTo("#list_nam_devices");
 $('#list_nam_devices').show();
+$("#flash").html('<%= j render partial: 'shared/notice_banner' %>');
