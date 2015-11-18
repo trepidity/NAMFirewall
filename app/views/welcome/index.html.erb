@@ -15,9 +15,9 @@
                 { :controller => :build_rules, :action=> :destroy, :page => @current_page},
                 { :remote => true, :id => 'lnk_clear_rules' }
   %>
-  <%= button_to 'Modify Components',
-                { :controller => :nam_components, :action=> :index, :page => @current_page},
-                { :remote => true, :id => 'lnk_load_components' }
+  <%= link_to 'Modify Components', nam_components_path
+                # { :controller => :nam_components, :action=> :index, :page => @current_page}
+                # { :remote => true, :id => 'lnk_load_components' }
   %>
 </div>
 

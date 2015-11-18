@@ -1,2 +1,13 @@
-<h1>Component#index</h1>
-<p>Find me in app/views/component/index.html.erb</p>
+<h1>Components List</h1>
+
+<li>
+  <% @components.each do |component| %>
+    <ul>
+      <%=component.name%> - <%=component.ipaddress%>
+      <%= link_to 'edit', edit_nam_component_path(component)%>
+      <%= link_to 'destroy', nam_component_path(component), :method => 'delete'%>
+    </ul>
+  <% end %>
+</li>
+
+<%= link_to 'Home', root_path %>

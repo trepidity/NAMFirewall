@@ -44,6 +44,8 @@ class NamComponentsController < ApplicationController
   end
 
   def index
+    hex = session[:session_hex]
+    @components = RuleModel.find_by_session_id(hex).NamComponents
   end
 
   def show
