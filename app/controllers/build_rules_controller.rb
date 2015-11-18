@@ -1,8 +1,7 @@
 class BuildRulesController < ApplicationController
 
   def destroy
-    rule_session = RuleModel.find_by_session_id(session[:session_hex])
-    flash[:notice] = 'Successfully cleared all rules' if rule_session.NamComponents.delete_all
+    flash[:notice] = 'Successfully cleared all rules' if RuleModel.destroy_all(:session_id => session[:session_hex])
   end
 
   # show the rules

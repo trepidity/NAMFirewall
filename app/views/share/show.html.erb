@@ -1,5 +1,9 @@
 <h2>Results</h2>
 
-<% @rule_model.rules.each do |rule| %>
-    <%= render :partial => 'build_rules/rule', :locals => {:rule => rule} %>
+<% if @rule_model.rules.count > 0 %>
+    <% @rule_model.rules.each do |rule| %>
+        <%= render :partial => 'build_rules/rule', :locals => {:rule => rule} %>
+    <% end %>
+<% else %>
+    <p>No rules defined yet.</p>
 <% end %>

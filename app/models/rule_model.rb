@@ -1,25 +1,25 @@
 class RuleModel < ActiveRecord::Base
   # attr_reader rules
-  has_many :NamComponents
+  has_many :nam_components, dependent: :destroy
 
   def idps
-    NamComponent.where(:component_type => 'idp')
+    nam_components.where(:component_type => 'idp')
   end
 
   def ags
-    NamComponent.where(:component_type => 'ag')
+    nam_components.where(:component_type => 'ag')
   end
 
   def admins
-    NamComponent.where(:component_type => 'admin')
+    nam_components.where(:component_type => 'admin')
   end
 
   def kerbs
-    NamComponent.where(:component_type => 'kerb')
+    nam_components.where(:component_type => 'kerb')
   end
 
   def ldaps
-    NamComponent.where(:component_type => 'ldap')
+    nam_components.where(:component_type => 'ldap')
   end
 
 

@@ -3,7 +3,7 @@ class NamComponentsController < ApplicationController
   def create
     hex = session[:session_hex]
     rule_session = RuleModel.find_by_session_id(hex)
-    @component = rule_session.NamComponents.create(component_params)
+    @component = rule_session.nam_components.create(component_params)
     if rule_session.save!
       respond_to do |format|
         logger.info 'Added successfully'
@@ -46,7 +46,7 @@ class NamComponentsController < ApplicationController
 
   def index
     hex = session[:session_hex]
-    @components = RuleModel.find_by_session_id(hex).NamComponents
+    @components = RuleModel.find_by_session_id(hex).nam_components
   end
 
   def show
