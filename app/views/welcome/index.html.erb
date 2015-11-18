@@ -1,31 +1,41 @@
-<h1>Welcome to NAM Firewalls by Novacoast</h1>
-<p>This tool can be used to generate the firewall rules required for the different NetIQ Access Manager components.</p>
-<p>You can find more information at .</p>
-
+<h1 class="text-muted">Welcome to NAM Firewalls by me.</h1>
+<div class="jumbotron">
+  <p class="lead">This tool can be used to generate the firewall rules required for the different NetIQ Access Manager
+    components.</p>
+</div>
 <%= render partial: 'nam_components/new_form' %>
 
-<li><%= render partial: 'nam_components/list_nam_device' %></li>
+<!--<li></li>-->
+<%= render partial: 'nam_components/list_nam_device' %>
 
-<div>
-  <%= button_to 'Build Rules',
-                { :controller => :build_rules, :action=> :show, :page => @current_page},
-                { :remote => true, :id => 'lnk_build' }
-  %>
-  <%= button_to 'Clear All Rules',
-                { :controller => :build_rules, :action=> :destroy, :page => @current_page},
-                { :remote => true, :id => 'lnk_clear_rules' }
-  %>
-  <%= link_to 'Modify Components', nam_components_path
-                # { :controller => :nam_components, :action=> :index, :page => @current_page}
-                # { :remote => true, :id => 'lnk_load_components' }
-  %>
-</div>
-
-<div id='session_id' style="display: none"><%=@rule_session.session_id %></div>
+<div id='session_id' style="display: none"><%= @rule_session.session_id %></div>
 
 <div id="results"></div>
 
-<div id="share_results">
-  <%=render partial: 'build_rules/share' %>
-  <%=render partial: 'build_rules/download_csv' %>
+<div id="share_results"></div>
+
+<div class="row-fluid">
+  <div class="cols-sm-6">
+
+    <%= button_to 'Build Rules',
+                  {:controller => :build_rules, :action => :show, :page => @current_page},
+                  {:remote => true, :id => 'lnk_build', :class => 'btn btn-success'}
+    %>
+  </div>
+  <div class="cols-sm-6 pull-right">
+    <%= button_to 'Clear All Rules',
+                  {:controller => :build_rules, :action => :destroy, :page => @current_page},
+                  {:remote => true, :id => 'lnk_clear_rules', :class => 'btn btn-danger'}
+    %>
+
+  </div>
+
 </div>
+
+<%= link_to 'Modify Components', nam_components_path, :class => 'btn btn-link' %>
+
+<%= link_to 'Save As CSV', download_path(@rule_session.session_id) + '.csv', :class => 'btn btn-link' %>
+
+<%= link_to 'Share', share_path(@rule_session.session_id), :class => 'btn btn-link' %>
+
+

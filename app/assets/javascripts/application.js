@@ -39,6 +39,9 @@ $(document).ready(function() {
         });
         return false; // cancel original event to prevent form submitting
     });
+
+    $.get("/nam_components.js", function(data, status){
+    });
 });
 
 (function( $, undefined ) {

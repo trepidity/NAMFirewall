@@ -1,0 +1,3 @@
+<% @components.each do |component| %>
+$("#list_nam_devices").append(<%= escape_javascript(render :partial => 'nam_components/nam_component', locals: { component: component }) %>);
+<% end %>

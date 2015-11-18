@@ -1,0 +1,4 @@
+<% @components.each do |component| %>
+$("<%= escape_javascript(render :partial => 'nam_components/nam_component.html', locals: { component: component }) %>").appendTo("#list_nam_devices");
+<% end %>
+$('#list_nam_devices').show();

@@ -7,7 +7,8 @@ class NamComponentsController < ApplicationController
     if rule_session.save!
       respond_to do |format|
         logger.info 'Added successfully'
-        format.js { flash[:notice] = 'Added successfully'}
+        flash[:notice] = 'Added successfully'
+        format.js { render :partial =>  'nam_components/nam_component', :locals => {:component => @component} }
       end
     else
       logger.error(@component.errors.full_messages)
