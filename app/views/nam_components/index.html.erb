@@ -1,13 +1,12 @@
+<%= link_to 'Home', root_path, :class => 'btn btn-link' %>
+
 <h1>Components List</h1>
-
-<li>
+<ul class="list-unstyled">
   <% @components.each do |component| %>
-    <ul>
-      <%=component.name%> - <%=component.ipaddress%>
-      <%= link_to 'edit', edit_nam_component_path(component)%>
-      <%= link_to 'destroy', nam_component_path(component), :method => 'delete'%>
-    </ul>
+      <li id="<%= component.id %>">
+        <%= component.name %> - <%= component.ipaddress %>
+        <%= link_to 'edit', edit_nam_component_path(component) %>
+        <%= link_to 'destroy', nam_component_path(component), :method => 'delete', :remote => true %>
+      </li>
   <% end %>
-</li>
-
-<%= link_to 'Home', root_path %>
+</ul>
