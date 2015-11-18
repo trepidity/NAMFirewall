@@ -35,8 +35,8 @@ class NamComponentsController < ApplicationController
     component = NamComponent.find(params[:id])
     respond_to do |format|
       if component.destroy
-        flash[:notice] = 'Delete successful.'
-        format.html { redirect_to root_url }
+        flash[:success] = 'Deleted successfully'
+        format.js { render 'nam_components/destroy', :locals => {:id => params[:id]}}
       else
         format.html { render action: 'edit' }
       end
