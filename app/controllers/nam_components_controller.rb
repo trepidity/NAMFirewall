@@ -47,6 +47,10 @@ class NamComponentsController < ApplicationController
   def index
     hex = session[:session_hex]
     @components = RuleModel.find_by_session_id(hex).nam_components
+  rescue
+    respond_to do |format|
+      format.html { render :partial => 'share/no_components_found' }
+    end
   end
 
   def show
