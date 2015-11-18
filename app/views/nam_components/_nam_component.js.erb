@@ -1,1 +1,1 @@
-$("#list_nam_devices").append("<%= escape_javascript(component.name) %>").show();
+$("#list_nam_devices").append("<%= escape_javascript(render partial: 'nam_components/nam_component.html', locals: { component: @component }) %>").show();
