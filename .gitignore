@@ -18,3 +18,4 @@
 
 # Ignore personal files
 /.idea/*
+vendor/bundle
