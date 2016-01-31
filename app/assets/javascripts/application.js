@@ -42,6 +42,19 @@ $(document).ready(function() {
 
     $.get("/nam_components.js", function(data, status){
     });
+
+    $('#firewall_separates_dip').change(function() {
+        $.ajax({ // create an AJAX call...
+            dataType: "JSON",
+            data: $(this).serialize(), // get the form data
+            type: $(this).attr('method'), // GET or POST
+            url: $(this).attr('action'), // the file to call
+            success: function(response) { // on success..
+                alert('saved');
+            }
+        });
+        return false; // cancel original event to prevent form submitting
+    });
 });
 
 (function( $, undefined ) {
