@@ -4,20 +4,20 @@
   </div>
 
   <div class="panel-body">
-    <%= form_for NamComponent.new, url: '/nam_components/create', remote: true do %>
+    <%= form_for NamComponent.new, url: '/nam_components/create', remote: true do |f|%>
 
         <div class="form-group">
           <div class="col-sm-4">
             <%= label_tag 'name:' %>
-            <%= text_field_tag :name, nil, :required => true, :class => 'form-control' %>
+            <%= f.text_field :name, :required => true, :class => 'form-control' %>
           </div>
           <div class="col-sm-4">
             <%= label_tag 'IP address:' %>
-            <%= text_field_tag :ipaddress, nil, :required => true, :class => 'form-control' %>
+            <%= f.text_field :ipaddress, :required => true, :class => 'form-control' %>
           </div>
           <div class="col-sm-4">
             <%= label_tag 'DMZ Name:' %>
-            <%= text_field_tag :dmz, nil, :required => false, :class => 'form-control' %>
+            <%= f.text_field :dmz, :required => false, :class => 'form-control' %>
           </div>
         </div>
         <h4>Component Type</h4>
@@ -25,30 +25,30 @@
         <div class="row">
           <div class="col-sm-12">
             <div class="checkbox">
-              <%= radio_button_tag :component_type, 'idp' %>
+              <%= f.radio_button :component_type, 'idp' %>
               <%= label_tag 'Identity Server' %>
             </div>
             <div class="checkbox">
-              <%= radio_button_tag :component_type, 'ag' %>
+              <%= f.radio_button :component_type, 'ag' %>
               <%= label_tag 'Access Gateway' %>
             </div>
             <div class="checkbox">
-              <%= radio_button_tag :component_type, 'admin' %>
+              <%= f.radio_button :component_type, 'admin' %>
               <%= label_tag 'Admin Console' %>
             </div>
             <div class="checkbox">
-              <%= radio_button_tag :component_type, 'ldap' %>
+              <%= f.radio_button :component_type, 'ldap' %>
               <%= label_tag 'eDirectory User Store' %>
             </div>
             <div class="checkbox">
-              <%= radio_button_tag :component_type, 'kerb' %>
+              <%= f.radio_button :component_type, 'kerb' %>
               <%= label_tag 'Active Directory User Store' %>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-lg-12">
-            <%= submit_tag 'Add Device', class: 'btn btn-primary' %>
+            <%= f.submit 'Add Device', class: 'btn btn-primary' %>
           </div>
         </div>
     <% end %>
