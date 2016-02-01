@@ -56,6 +56,7 @@ group :development, :test do
   gem 'guard-livereload'
   gem 'factory_girl_rails'
   gem 'quiet_assets'
+  gem 'faker'
 end
 
 group :production do
