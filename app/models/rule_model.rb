@@ -1,6 +1,7 @@
 class RuleModel < ActiveRecord::Base
   # attr_reader rules
   has_many :nam_components, dependent: :destroy
+  has_one :network_detail
 
   def idps
     nam_components.where(:component_type => 'idp')
@@ -30,15 +31,29 @@ class RuleModel < ActiveRecord::Base
     ag_ports = [1443, 80, 443]
     kerb_ports = [636, 88]
     ldap_ports = [636]
+    idp_cluster_ports = [7801, 7802]
+    ag_cluster_ports = [7801, 7802]
+    ac_cluster_ports = [524, 636, 1289]
 
 # build the rules for the IDP servers
     idps.each { |idp|
 
+      # so the IDP servers can talk to each other
+      if network_detail.fw_separates_idp
+        idps.each do |other|
+          next if idp.ipaddress.eql?(other.ipaddress)
+          rule = Rule.new
+          rule.source = idp.ipaddress
+          rule.dest = other.ipaddress
+          rule.port = idp_cluster_ports
+          rule.comment = "#Identity Server #{idp.name} to Identity Server #{other.name}"
+          rules.push(rule)
+        end
+      end
+
       # build connections to the admin servers
       admins.each { |admin|
-        rule = Rule.new
-        rule.source = idp.ipaddress
-        rule.dest = admin.ipaddress
+        rule = rule_add(idp, admin)
         rule.port = admin_ports
         rule.comment = "#Identity Server #{idp.name} to Admin Console #{admin.name}"
         rules.push(rule)
@@ -89,6 +104,20 @@ class RuleModel < ActiveRecord::Base
     # build the rules for the Access Gateways
     ags.each { |ag|
 
+      # so the Gateway servers can talk to each other
+      if network_detail.fw_separates_ag
+        ags.each do |other|
+          next if ag.ipaddress.eql?(other.ipaddress)
+          rule = Rule.new
+          rule.source = ag.ipaddress
+          rule.dest = other.ipaddress
+          rule.port = ag_cluster_ports
+          rule.comment = "#Access Gateway #{ag.name} to Access Gateway #{other.name}"
+          rules.push(rule)
+        end
+      end
+
+
       # AG to ADMIN
       admins.each { |admin|
         rule = Rule.new
@@ -110,6 +139,20 @@ class RuleModel < ActiveRecord::Base
 
     # build the rules for the ADMIN consoles
     admins.each { |admin|
+
+      # so the Admin servers can talk to each other
+      if network_detail.fw_separates_ac
+        admins.each do |other|
+          next if admin.ipaddress.eql?(other.ipaddress)
+          rule = Rule.new
+          rule.source = admin.ipaddress
+          rule.dest = other.ipaddress
+          rule.port = ac_cluster_ports
+          rule.comment = "#Admin Console #{admin.name} to Admin Console #{other.name}"
+          rules.push(rule)
+        end
+      end
+
       # ADMIN to LDAP server (eDirectory)
       ldaps.each { |ldap|
         rule = Rule.new
@@ -133,5 +176,24 @@ class RuleModel < ActiveRecord::Base
 
     puts "Built #{rules.count} rules"
     rules
+  end
+
+  private
+
+  # need to switch everything over to this.
+  def rule_add(source, dest)
+    rule = Rule.new
+    rule.source = source.ipaddress
+    rule.dest = dest.ipaddress
+
+    case source.component_type
+      when :idp
+        rule.port = idp_ports
+      when :kerb
+        rule.port = kerb_ports
+      else
+        Rails.logger.warn "Could find a component type match for #{source.inspect}"
+    end
+    rule
   end
 end

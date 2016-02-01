@@ -9,6 +9,8 @@ class WelcomeController < ApplicationController
     end
 
     @rule_session = RuleModel.find_or_create_by!(:session_id => hex)
+
+    @network_detail = NetworkDetail.new
   end
 
 end

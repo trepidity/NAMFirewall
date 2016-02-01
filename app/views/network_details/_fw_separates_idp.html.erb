@@ -1,0 +1,20 @@
+<%= form_for(@network_detail, method: :post, remote: true) do %>
+    <div class="checkbox">
+      <label><input type="checkbox" value="">
+        <%= check_box(:network_detail, :fw_separates_idp) %>
+        Firewall separates Identity Provider components
+      </label>
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox" value="">
+        <%= check_box(:network_detail, :fw_separates_ag) %>
+        Firewall separates Access Gateway components
+      </label>
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox" value="">
+        <%= check_box(:network_detail, :fw_separates_ac) %>
+        Firewall separates Admin Console components
+      </label>
+    </div>
+<% end %>

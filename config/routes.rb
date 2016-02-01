@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :share
   resources :download
 
+  resource :network_details
+
   get 'build_rules/show'
   post 'build_rules/show'
 

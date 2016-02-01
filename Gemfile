@@ -47,10 +47,15 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'quiet_assets'
   gem 'awesome_print'
   gem 'pry-rails'
   gem 'better_errors'
+  gem 'rspec-rails'
+  gem 'guard'
+  gem 'guard-rspec', require: false
+  gem 'guard-livereload'
+  gem 'factory_girl_rails'
+  gem 'quiet_assets'
 end
 
 group :production do

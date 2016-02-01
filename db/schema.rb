@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151016160309) do
+ActiveRecord::Schema.define(version: 20160131051946) do
 
   create_table "nam_components", force: :cascade do |t|
     t.string   "ipaddress"
@@ -23,6 +23,17 @@ ActiveRecord::Schema.define(version: 20151016160309) do
   end
 
   add_index "nam_components", ["rule_model_id"], name: "index_nam_components_on_rule_model_id"
+
+  create_table "network_details", force: :cascade do |t|
+    t.boolean  "fw_separates_idp"
+    t.boolean  "fw_separates_ag"
+    t.boolean  "fw_separates_ac"
+    t.integer  "rule_model_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "network_details", ["rule_model_id"], name: "index_network_details_on_rule_model_id"
 
   create_table "rule_models", force: :cascade do |t|
     t.string   "session_id"
