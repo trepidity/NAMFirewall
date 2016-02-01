@@ -41,7 +41,16 @@ class RuleModel < ActiveRecord::Base
       # so the IDP servers can talk to each other
       if network_detail.fw_separates_idp
         idps.each do |other|
+          # don't map rules to it's own device
           next if idp.ipaddress.eql?(other.ipaddress)
+
+          # don't map rules if in the same DMZ
+          unless idp.dmz.nil?
+            unless other.dmz.nil?
+              next if idp.dmz.eql?(other.dmz)
+            end
+          end
+
           rule = Rule.new
           rule.source = idp.ipaddress
           rule.dest = other.ipaddress
@@ -107,7 +116,16 @@ class RuleModel < ActiveRecord::Base
       # so the Gateway servers can talk to each other
       if network_detail.fw_separates_ag
         ags.each do |other|
+          # don't map rules to it's own device
           next if ag.ipaddress.eql?(other.ipaddress)
+
+          # don't map rules if in the same DMZ
+          unless ag.dmz.nil?
+            unless other.dmz.nil?
+              next if ag.dmz.eql?(other.dmz)
+            end
+          end
+
           rule = Rule.new
           rule.source = ag.ipaddress
           rule.dest = other.ipaddress
@@ -144,6 +162,14 @@ class RuleModel < ActiveRecord::Base
       if network_detail.fw_separates_ac
         admins.each do |other|
           next if admin.ipaddress.eql?(other.ipaddress)
+
+          # don't map rules if in the same DMZ
+          unless admin.dmz.nil?
+            unless other.dmz.nil?
+              next if admin.dmz.eql?(other.dmz)
+            end
+          end
+
           rule = Rule.new
           rule.source = admin.ipaddress
           rule.dest = other.ipaddress

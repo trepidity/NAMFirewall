@@ -21,6 +21,11 @@ RSpec.describe NamComponent, type: :model do
       expect(nam_component.name).to_not be nil
     end
 
+    it 'is not in the same DMZ' do
+      nam_component.update(:dmz => 'public')
+      expect(nam_component.dmz).to eql 'public'
+    end
+
   end
 
 end

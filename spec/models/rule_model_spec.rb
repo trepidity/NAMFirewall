@@ -19,11 +19,11 @@ RSpec.describe RuleModel, type: :model do
 
   end
 
-  context 'build rules' do
+  context 'builds' do
     let(:rule_model) { create(:rule_model) }
     subject { rule_model }
 
-    it 'bulds rules' do
+    it 'ports for FW separating the IDPs' do
       expect(subject.rules.first.dest).to eql '192.168.0.3'
       expect(subject.rules.first.port).to eql [7801, 7802]
     end
@@ -32,7 +32,7 @@ RSpec.describe RuleModel, type: :model do
       expect(subject.rules.count).to eql 18
     end
 
-    it 'FW separates AG' do
+    it 'builds rules for FWs separating the AGs' do
       subject.network_detail.update(:fw_separates_ag => true)
       expect(subject.rules.count).to eql 20
     end

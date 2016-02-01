@@ -16,8 +16,8 @@ FactoryGirl.define do
       FactoryGirl.create(:nam_component, :component_type => 'idp', :ipaddress => '192.168.0.2', :rule_model => rule)
       FactoryGirl.create(:nam_component, :component_type => 'idp', :ipaddress => '192.168.0.3', :rule_model => rule)
 
-      FactoryGirl.create(:nam_component, :component_type => 'ag', :ipaddress => '192.168.1.2', :rule_model => rule)
-      FactoryGirl.create(:nam_component, :component_type => 'ag', :ipaddress => '192.168.1.3', :rule_model => rule)
+      FactoryGirl.create(:nam_component, :component_type => 'ag', :ipaddress => '192.168.1.2', :rule_model => rule, :dmz => 'public')
+      FactoryGirl.create(:nam_component, :component_type => 'ag', :ipaddress => '192.168.1.3', :rule_model => rule, :dmz => 'dr')
 
       FactoryGirl.create(:nam_component, :component_type => 'admin', :ipaddress => '10.10.1.2', :rule_model => rule)
       FactoryGirl.create(:nam_component, :component_type => 'admin', :ipaddress => '10.10.1.3', :rule_model => rule)

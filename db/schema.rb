@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160131051946) do
+ActiveRecord::Schema.define(version: 20160201213717) do
 
   create_table "nam_components", force: :cascade do |t|
     t.string   "ipaddress"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20160131051946) do
     t.string   "rule_model_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "dmz"
   end
 
   add_index "nam_components", ["rule_model_id"], name: "index_nam_components_on_rule_model_id"

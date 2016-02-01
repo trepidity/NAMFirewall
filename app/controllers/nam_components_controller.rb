@@ -19,7 +19,7 @@ class NamComponentsController < ApplicationController
   def update
     @component = NamComponent.find(params[:id])
     respond_to do |format|
-      if @component.update_attributes(params[:nam_component].permit(:name, :ipaddress, :component_type))
+      if @component.update_attributes(component_params)
         flash[:notice] = 'Update successful.'
         format.html { redirect_to root_url }
       else
@@ -60,6 +60,6 @@ class NamComponentsController < ApplicationController
 
   private
   def component_params
-    params.permit(:name, :ipaddress, :component_type)
+    params.require(:nam_component).permit(:name, :ipaddress, :component_type, :dmz)
   end
 end
