@@ -26,6 +26,18 @@ RSpec.describe NamComponent, type: :model do
       expect(nam_component.dmz).to eql 'public'
     end
 
+    it 'requires a valid IP address' do
+      expect(build(:nam_component, :ipaddress => "192.168.192").valid?).to be false
+    end
+
+    it 'does not allow spaces in the name' do
+      expect(build(:nam_component, :name => "one two").valid?).to be false
+    end
+
+    it 'does not allow spaces in the name' do
+      expect(build(:nam_component, :name => "goblxpvidp1").valid?).to be true
+    end
+
   end
 
 end
